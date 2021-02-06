@@ -1,4 +1,4 @@
-package com.rcnstudios.jgame.utils;
+package com.rcnstudios.jgame.utils.math;
 
 import com.rcnstudios.jgame.utils.math.vectors.Vector2f;
 
