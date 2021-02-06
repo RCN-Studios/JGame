@@ -2,6 +2,7 @@ package com.rcnstudios.jgame;
 
 import com.rcnstudios.jgame.input.MouseListener;
 import com.rcnstudios.jgame.input.KeyListener;
+import com.rcnstudios.jgame.utils.FileUtils;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
@@ -13,21 +14,18 @@ public class Window {
 
     private static Window window = null;
 
+    private static final String basicFragmentShader = FileUtils.loadAsString("assets/shaders/fragment.glsl");
+    private static final String basicVertexShader = FileUtils.loadAsString("assets/shaders/vertex.glsl");
+
     private long glfwWindow;
 
     private int width, height;
     private String title;
 
-    private float r,g,b;
-    private boolean fadeToBlack = false;
-
     private Window() {
         this.width = 1920;
         this.height = 1080;
         this.title = "JGame Window";
-        this.r = 1;
-        this.g = 1;
-        this.b = 1;
     }
 
     public void run() {
@@ -67,7 +65,6 @@ public class Window {
         GLFW.glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback);
         GLFW.glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
         GLFW.glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
-
         GLFW.glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
 
         // Set context to current and enable swap
@@ -83,18 +80,8 @@ public class Window {
         while (!GLFW.glfwWindowShouldClose(glfwWindow)) {
             GLFW.glfwPollEvents();
 
-            GL33.glClearColor(r,g,b, 1.0f);
+            GL33.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
             GL33.glClear(GL33.GL_COLOR_BUFFER_BIT);
-
-            if (fadeToBlack) {
-                r = Math.max(r-0.001f,0);
-                g = Math.max(g-0.01f,0);
-                b = Math.max(b-0.1f,0);
-            }
-
-            if (KeyListener.isKeyPressed(GLFW.GLFW_KEY_SPACE)) {
-                fadeToBlack = true;
-            }
 
             GLFW.glfwSwapBuffers(glfwWindow);
         }
