@@ -1,7 +1,7 @@
 package com.rcnstudios.jgame;
 
-import com.rcnstudios.jgame.input.MouseListener;
-import com.rcnstudios.jgame.input.KeyListener;
+import com.rcnstudios.jgame.input.Mouse;
+import com.rcnstudios.jgame.input.Keyboard;
 import com.rcnstudios.jgame.utils.FileUtils;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -62,10 +62,10 @@ public class Window {
         }
 
         // Create callbacks
-        GLFW.glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback);
-        GLFW.glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
-        GLFW.glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
-        GLFW.glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
+        GLFW.glfwSetCursorPosCallback(glfwWindow, Mouse::mousePosCallback);
+        GLFW.glfwSetMouseButtonCallback(glfwWindow, Mouse::mouseButtonCallback);
+        GLFW.glfwSetScrollCallback(glfwWindow, Mouse::mouseScrollCallback);
+        GLFW.glfwSetKeyCallback(glfwWindow, Keyboard::keyCallback);
 
         // Set context to current and enable swap
         GLFW.glfwMakeContextCurrent(glfwWindow);

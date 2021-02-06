@@ -2,18 +2,18 @@ package com.rcnstudios.jgame.input;
 
 import org.lwjgl.glfw.GLFW;
 
-public class KeyListener {
+public class Keyboard {
 
-    private static KeyListener instance;
+    private static Keyboard instance;
 
     private boolean keyPressed[] = new boolean[350];
 
-    private KeyListener() { }
+    private Keyboard() { }
 
-    public static KeyListener get() {
-        if (KeyListener.instance == null)
-            KeyListener.instance = new KeyListener();
-        return KeyListener.instance;
+    public static Keyboard get() {
+        if (Keyboard.instance == null)
+            Keyboard.instance = new Keyboard();
+        return Keyboard.instance;
     }
 
     public static void keyCallback(long window, int key, int scancode, int action, int mods){

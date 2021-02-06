@@ -2,16 +2,16 @@ package com.rcnstudios.jgame.input;
 
 import org.lwjgl.glfw.GLFW;
 
-public class MouseListener {
+public class Mouse {
 
-    private static MouseListener instance;
+    private static Mouse instance;
 
     private double scrollX, scrollY;
     private double xPos, yPos, lastX, lastY;
     private boolean mouseButtonPressed[] = new boolean[3];
     private boolean isDragging;
 
-    private MouseListener(){
+    private Mouse(){
         this.scrollX = 0.0;
         this.scrollY = 0.0;
         this.xPos = 0.0;
@@ -20,10 +20,10 @@ public class MouseListener {
         this.lastY = 0.0;
     }
 
-    public static MouseListener get() {
-        if (MouseListener.instance == null)
-            MouseListener.instance = new MouseListener();
-        return MouseListener.instance;
+    public static Mouse get() {
+        if (Mouse.instance == null)
+            Mouse.instance = new Mouse();
+        return Mouse.instance;
     }
 
     public static void mousePosCallback(long window, double xPos, double yPos) {
