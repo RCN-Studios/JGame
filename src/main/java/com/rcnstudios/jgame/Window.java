@@ -2,6 +2,7 @@ package com.rcnstudios.jgame;
 
 import com.rcnstudios.jgame.input.Mouse;
 import com.rcnstudios.jgame.input.Keyboard;
+import com.rcnstudios.jgame.renderer.Shader;
 import com.rcnstudios.jgame.utils.FileUtils;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -14,13 +15,13 @@ public class Window {
 
     private static Window window = null;
 
-    private static final String basicFragmentShader = FileUtils.loadAsString("assets/shaders/fragment.glsl");
-    private static final String basicVertexShader = FileUtils.loadAsString("assets/shaders/vertex.glsl");
-
     private long glfwWindow;
 
     private int width, height;
     private String title;
+
+    //implement better way later
+    Shader s;
 
     private Window() {
         this.width = 1920;
@@ -42,6 +43,7 @@ public class Window {
     }
 
     private void init() {
+        //System.out.println(basicFragmentShader + basicVertexShader);
         GLFWErrorCallback.createPrint(System.err).set();
 
         // Initialize GLFW
@@ -74,14 +76,27 @@ public class Window {
         // Show the window & create GL capabilities after its all setup
         GLFW.glfwShowWindow(glfwWindow);
         GL.createCapabilities();
+
+
+
+
+
+
+
+
     }
 
     private void loop(){
+        Shader s = new Shader();
+        s.compile();
+        s.test();
         while (!GLFW.glfwWindowShouldClose(glfwWindow)) {
             GLFW.glfwPollEvents();
 
             GL33.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
             GL33.glClear(GL33.GL_COLOR_BUFFER_BIT);
+            s.execute();
+
 
             GLFW.glfwSwapBuffers(glfwWindow);
         }

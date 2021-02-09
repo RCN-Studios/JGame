@@ -4,8 +4,7 @@ in vec4 fColor;
 
 out vec4 color;
 
-void main() {
-
+void main()
+{
     color = fColor;
-
 }
